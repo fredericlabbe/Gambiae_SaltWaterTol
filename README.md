@@ -6,7 +6,8 @@ Not everything is documented yet, but most scripts have some helpful information
 ## Contents
 
 * [Finding CRISPR target sites](#Finding-CRISPR-target-sites)
-* [Filtering sequence alignment(s)](#Filtering-sequence-alignment(s))
+* [Filtering sequence alignments](#Filtering-sequence-alignments)
+* [Filtering non-coding loci](#Filtering-non-coding-loci)
 
 ___
 ## Finding CRISPR target sites
@@ -24,7 +25,7 @@ For each reverse CRISPR target site, CRISPRs.py exports its coordinates (chromos
 The script CRISPRs.py will not check the occurrence of CRISPR target sites within soft-masked regions of the reference genome (i.e. in lower-case, e.g. repetitive elements and low-complexity sequences).
 
 ___
-## Filtering sequence alignment(s)
+## Filtering sequence alignments
 The script `FltPropGap.py` filters each sequence alignment in PHYLIP format that has fewer than a maximum proportion of gap (e.g. 50%).
 This script will move each sequence alignment that passed the filter to the *1_Keep* directory, and move each sequence alignment that did not pass the filter to the *2_Remove* directory.
 
@@ -35,3 +36,15 @@ This script will move each sequence alignment that passed the filter to the *1_K
 
 #### Notes
 The script FltPropGap.py needs to be run from the directory containing the sequence alignments to filter.
+
+___
+## Filtering non-coding loci
+To infer the species tree of the *Anopheles gambiae* complex [Thawornwattana et al. (2018)](https://academic.oup.com/mbe/article/35/10/2512/5068377) extracted coding and non-coding short segments (called loci) from the genomes of six members of the *Anopheles gambiae* complex and used the program [BPP](https://academic.oup.com/cz/article/61/5/854/1821090). BPP implements a Bayesian method under the multispecies coalescent (MSC) model which takes into account genealogical heterogeneity across the genome and uncertainty in the gene trees. Following the procedure of [Thawornwattana et al. (2018)](https://academic.oup.com/mbe/article/35/10/2512/5068377), the script `NonCodingLoci.py` filters and extracts the coordinates of the non-coding loci containing between 100 and 1,000 sites, and that are at least 2 kb apart from the consecutive loci.
+
+#### Example command
+`python NonCodingLoci.py --noncoding 2L.bed --chr 2L --size 49364325`
+
+`python NonCodingLoci.py -h` Will print a full list of command arguments.
+
+#### Notes
+The script NonCodingLoci.py takes a BED file describing the coordinates of each non-coding loci and could be generated using [BEDtools](https://bedtools.readthedocs.io/en/latest/) and a general feature format (GFF) file describing the genes and other features of the genome.
