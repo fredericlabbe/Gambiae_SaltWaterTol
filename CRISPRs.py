@@ -4,9 +4,9 @@
 Created on Sat Aug 23 09:24:01 2019
 @author: Frederic Labbe
 Checking the occurrence of overlapping forward and reverse CRISPR target sites from a reference genome in the FASTA format.
-This script is based on the most commonly-used Cas9 from Streptococcus pyogenes, which recognizes the protospacer adjacent motif (PAM) sequence 5′-NGG-3′ (where “N” can be any nucleotide base).
-For each forward CRISPR target sites, this script exports its coordinates (i.e. chromosome, start and end), sequence (e.g. ATGCGCCACACTTGACACTGG), and strand (i.e. for).
-For each reverse CRISPR target sites, this script exports its coordinates (i.e. chromosome, start and end), reverse complement sequence (e.g. from CCAGTGTCAAGTGTGGCGCAT to ATGCGCCACACTTGACACTGG), and strand (i.e. rev).
+This script is based on the most commonly used Cas9 from Streptococcus pyogenes, which recognizes the protospacer adjacent motif (PAM) sequence 5′-NGG-3′ (where “N” can be any nucleotide base).
+For each forward CRISPR target site, this script exports its coordinates (i.e. chromosome, start, and end), sequence (e.g. ATGCGCCACACTTGACACTGG), and strand (i.e. for).
+For each reverse CRISPR target site, this script exports its coordinates (i.e. chromosome, start, and end), reverse complement sequence (e.g. from CCAGTGTCAAGTGTGGCGCAT to ATGCGCCACACTTGACACTGG), and strand (i.e. rev).
 Note: this script will not check the occurrence of CRISPR target sites within soft-masked parts of the reference genome (i.e. in lower-case, e.g. repetitive elements and low-complexity sequences).
 usage: python CRISPRs.py --size 18 --ref file.fasta
 """
