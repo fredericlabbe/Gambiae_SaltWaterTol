@@ -28,7 +28,7 @@ ExtOutStat <- function(data, stat, species) {
 # species: the species to be considered in the calculations, e.g. "Species1", "Species2", or "Species1_Species2".
 # format: format of the plot, i.e. "col" (one column per scaffold), or "row" (one row per scaffold).
 # candidate (optional): a list of candidate gene(s) in a file with two columns minimum: a "ID" column and a "mid" column (indicating the mid coordinates).
-PlotStatWind <- function(data, stat, species, format='row', candidate) {
+PlotStatWind <- function(data, stat, species, format = 'row', candidate) {
   w <- max(as.numeric(eval(parse(text = paste("data$", stat, "_", species, sep = "")))))                                          # Calculate the maximum.
   x <- as.numeric(quantile(as.numeric(eval(parse(text = paste("data$", stat, "_", species, sep = "")))), 0.025, na.rm = T))       # Calculate the 2.5% quantile.
   y <- as.numeric(quantile(as.numeric(eval(parse(text = paste("data$", stat, "_", species, sep = "")))), 0.975, na.rm = T))       # Calculate the 2.5% quantile.
