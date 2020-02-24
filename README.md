@@ -26,7 +26,7 @@ The script CRISPRs.py will not check the occurrence of CRISPR target sites withi
 
 ___
 ## Filtering sequence alignments
-The script `FltPropGap.py` filters each sequence alignment in PHYLIP format that has fewer than a maximum proportion of gap (e.g. 50%).
+The script `FltPropGap.py` filters each sequence alignment in PHYLIP format (.phy) that has fewer than a maximum proportion of gap (e.g. 50%).
 This script will move each sequence alignment that passed the filter to the *1_Keep* directory, and move each sequence alignment that did not pass the filter to the *2_Remove* directory.
 
 #### Example command
