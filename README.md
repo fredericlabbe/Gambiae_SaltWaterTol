@@ -27,7 +27,7 @@ The script CRISPRs.py will not check the occurrence of CRISPR target sites withi
 
 ___
 ## Filtering sequence alignments
-The script `FltPropGap.py` filters each sequence alignment in PHYLIP format (.phy) that has fewer than a maximum proportion of gap (e.g. 50%).
+The script `FltPropGap.py` filters each sequence alignment in [PHYLIP](http://rosalind.info/glossary/phylip-format/) format (.phy) that has fewer than a maximum proportion of gap (e.g. 50%).
 This script will move each sequence alignment that passed the filter to the *1_Keep* directory, and move each sequence alignment that did not pass the filter to the *2_Remove* directory.
 
 #### Example command
@@ -52,7 +52,7 @@ The script NonCodingLoci.py takes a BED file describing the coordinates of each 
 
 ___
 ## Excluding species from sequence alignments
-[BPP](https://academic.oup.com/cz/article/61/5/854/1821090) takes a  sequence  alignment file that contains the sequence data for all short segments (called loci). These sequence alignments for multiple loci are in the PHYLIP format (.phy), with one alignment following the other, all in one file. The script `ExclSpecPhyl.py` excludes one species from sequence alignments in PHYLIP format.
+[BPP](https://academic.oup.com/cz/article/61/5/854/1821090) takes a  sequence  alignment file that contains the sequence data for all short segments (called loci). These sequence alignments for multiple loci are in the [PHYLIP](http://rosalind.info/glossary/phylip-format/) format (.phy), with one alignment following the other, all in one file. The script `ExclSpecPhyl.py` excludes one species from sequence alignments in PHYLIP format.
 
 #### Example command
 `python ExclSpecPhyl.py --species spA`
