@@ -8,6 +8,7 @@ Not everything is documented yet, but most scripts have some helpful information
 * [Finding CRISPR target sites](#Finding-CRISPR-target-sites)
 * [Filtering sequence alignments](#Filtering-sequence-alignments)
 * [Filtering non-coding loci](#Filtering-non-coding-loci)
+* [Excluding species from sequence alignments](#Excluding-species-from-sequence-alignments)
 
 ___
 ## Finding CRISPR target sites
@@ -48,3 +49,13 @@ To infer the species tree of the *Anopheles gambiae* complex [Thawornwattana et 
 
 #### Notes
 The script NonCodingLoci.py takes a BED file describing the coordinates of each non-coding loci and could be generated using [BEDtools](https://bedtools.readthedocs.io/en/latest/) and a general feature format (GFF) file describing the genes and other features of the genome.
+
+___
+## Excluding species from sequence alignments
+The script `ExclSpecPhyl.py` excludes one species from multiple sequence alignments in PHYLIP format (i.e. input format of [BPP](https://academic.oup.com/cz/article/61/5/854/1821090)).
+
+#### Example command
+`python ExclSpecPhyl.py --species spA`
+
+`python ExclSpecPhyl.py -h` Will print a full list of command arguments.
+
