@@ -52,10 +52,12 @@ The script NonCodingLoci.py takes a BED file describing the coordinates of each 
 
 ___
 ## Excluding species from sequence alignments
-The script `ExclSpecPhyl.py` excludes one species from multiple sequence alignments in PHYLIP format (i.e. input format of [BPP](https://academic.oup.com/cz/article/61/5/854/1821090)).
+[BPP](https://academic.oup.com/cz/article/61/5/854/1821090) takes a  sequence  alignment file that contains the sequence data for all short segments (called loci). These sequence alignments for multiple loci are in the PHYLIP format (.phy), with one alignment following the other, all in one file. The script `ExclSpecPhyl.py` excludes one species from sequence alignments in PHYLIP format.
 
 #### Example command
 `python ExclSpecPhyl.py --species spA`
 
 `python ExclSpecPhyl.py -h` Will print a full list of command arguments.
 
+#### Notes
+The script ExclSpecPhyl.py needs to be run from the directory containing the sequence alignments to filter.
