@@ -16,28 +16,32 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-p', "--prop", type=float, required=True, help='maximum proportion of gap in the alignment')
 args = parser.parse_args()
 
-current_directory = os.getcwd()
-keep_directory = os.path.join(current_directory, r'1_Keep')
-if not os.path.exists(keep_directory):
-   os.makedirs(keep_directory)  
-rem_directory = os.path.join(current_directory, r'2_Remove')
-if not os.path.exists(rem_directory):
-   os.makedirs(rem_directory)
+def FltPropGap(prop):
+    current_directory = os.getcwd()
+    keep_directory = os.path.join(current_directory, r'1_Keep')
+    if not os.path.exists(keep_directory):
+        os.makedirs(keep_directory)  
+        rem_directory = os.path.join(current_directory, r'2_Remove')
+    if not os.path.exists(rem_directory):
+        os.makedirs(rem_directory)
+    files = glob.glob('*.phy')
+    for file in files:
+        with open(file, 'r') as phy:
+            header = phy.readline()
+            headsp = header.split()
+            length = int(headsp[1])
+            maxgap = int(length * prop)
+            nbgaps = list()
+            for line in phy:
+                x = line.split()
+                gap = x[1].count('-')
+                nbgaps.append(int(gap))
+            nbgaps.sort(reverse = True)
+        if nbgaps[0] < maxgap:
+            shutil.move(file, keep_directory)
+        else:
+            shutil.move(file, rem_directory)
 
-files = glob.glob('*.phy')
-for file in files:
-    with open(file, 'r') as phy:
-        header = phy.readline()
-        headsp = header.split()
-        length = int(headsp[1])
-        maxgap = int(length * args.prop)
-        nbgaps = list()
-        for line in phy:
-            x = line.split()
-            gap = x[1].count('-')
-            nbgaps.append(int(gap))
-        nbgaps.sort(reverse = True)
-    if nbgaps[0] < maxgap:
-        shutil.move(file, keep_directory)
-    else:
-        shutil.move(file, rem_directory)
+if __name__ == '__main__':
+    FltPropGap(args.prop)
+    
