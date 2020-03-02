@@ -9,6 +9,7 @@ Not everything is documented yet, but most scripts have some helpful information
 * [Filtering non-coding loci](#Filtering-non-coding-loci)
 * [Excluding species from sequence alignments](#Excluding-species-from-sequence-alignments)
 * [Filtering sequence alignments](#Filtering-sequence-alignments)
+* [Adapting BPP control files](#Adapting-BPP-control-files)
 * [Extracting best trees](#Extracting-best-trees)
 
 ___
@@ -61,6 +62,18 @@ The script `FltPropGap.py` filters each sequence alignment in [PHYLIP](http://ro
 
 #### Notes
 The script FltPropGap.py needs to be run from the directory containing the sequence alignments to filter.
+
+___
+## Adapting BPP control files
+For computational tractability of [BPP](https://academic.oup.com/cz/article/61/5/854/1821090) and to explore the heterogeneity in species relationships across the genome, [Thawornwattana et al. (2018)](https://academic.oup.com/mbe/article/35/10/2512/5068377) split each data set into blocks of 100 short segments (called loci). While the script [`clustPhy.py`](https://github.com/stsmall/An_funestus/blob/master/clustPhy.py) clusters the loci in blocks (e.g. 100), the script [`makeCTL4BPP.py`](https://github.com/stsmall/An_funestus/blob/master/makeCTL4BPP.py) makes a control file for each block (e.g. A01.bpp.ctl), which defines the type and parameters of the analysis to be run in BPP. However, as the last block generated with the script clustPhy.py usually contains less loci than the required number, the number of loci listed in the control file and the number of loci in the block do not match. Therefore, for each sequence alignment file, the script `NbLociCtl.py` counts the number of loci per block, and changes the number of listed loci in the corresponding control file if necessary. 
+
+#### Example command
+`python NbLociCtl.py --block 100 --species 7`
+
+`python NbLociCtl.py -h` Will print a full list of command arguments.
+
+#### Notes
+The script NbLociCtl.py needs to be run from the directory containing the control and sequence alignment files required by the A01 analysis of BPP. The blocks having less than the required number of loci can be run in BPP using the modified control file, or can be excluded from the BPP analysis.
 
 ___
 ## Extracting best trees
