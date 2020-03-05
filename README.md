@@ -29,15 +29,15 @@ The script `CRISPRs.py` will not check the occurrence of CRISPR target sites wit
 
 ___
 ## Filtering non-coding loci
-To infer the species tree of the *Anopheles gambiae* complex [Thawornwattana et al. (2018)](https://academic.oup.com/mbe/article/35/10/2512/5068377) extracted coding and non-coding short segments (called loci) from the genomes of six members of the *Anopheles gambiae* complex and used the program [BPP](https://academic.oup.com/cz/article/61/5/854/1821090). BPP implements a Bayesian method under the multispecies coalescent (MSC) model which takes into account genealogical heterogeneity across the genome and uncertainty in the gene trees. Following the procedure of [Thawornwattana et al. (2018)](https://academic.oup.com/mbe/article/35/10/2512/5068377), the script `NonCodingLoci.py` filters and extracts the coordinates of the non-coding loci containing between 100 and 1,000 sites, and that are at least 2 kb apart from the consecutive loci.
+To infer the species tree of the *Anopheles gambiae* complex [Thawornwattana et al. (2018)](https://academic.oup.com/mbe/article/35/10/2512/5068377) extracted coding and non-coding short segments (called loci) from the genomes of six members of the *Anopheles gambiae* complex and used the program [BPP](https://academic.oup.com/cz/article/61/5/854/1821090). BPP implements a Bayesian method under the multispecies coalescent (MSC) model which takes into account genealogical heterogeneity across the genome and uncertainty in the gene trees. Following the procedure of [Thawornwattana et al. (2018)](https://academic.oup.com/mbe/article/35/10/2512/5068377), the script `NonCodingLoci.py` filters and extracts the coordinates of the non-coding loci containing between 100 and 1,000 sites, and that are at least 2 kb apart from consecutive loci. The coordinates of the filtered non-coding loci will be stored into one [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) file and one [BEDGRAPH](https://genome.ucsc.edu/goldenPath/help/bedgraph.html) file, which can then be used in [MafFilter](https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-15-53) to extract the non-coding regions of an alignment. 
 
 #### Example command
-`python NonCodingLoci.py --noncoding 2L.bed --chr 2L --size 49364325`
+`python NonCodLoc.py --bed 2L.bed --chromosome 2L --size 49364325 --distance 2000 --minimum 100 --maximum 1000`
 
-`python NonCodingLoci.py -h` Will print a full list of command arguments.
+`python NonCodLoc.py -h` Will print a full list of command arguments.
 
 #### Notes
-The script `NonCodingLoci.py` takes a BED file describing the coordinates of each non-coding loci and could be generated using [BEDtools](https://bedtools.readthedocs.io/en/latest/) and a general feature format (GFF) file describing the genes and other features of the genome.
+The script `NonCodLoc.py` takes a [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) file describing the coordinates of each non-coding locus which can be generated using [BEDtools](https://bedtools.readthedocs.io/en/latest/) and a general feature format (GFF) file describing the genes and other features of the genome. While the default parameters of the script `NonCodLoc.py` follow the exact procedure of [Thawornwattana et al. (2018)](https://academic.oup.com/mbe/article/35/10/2512/5068377), different parameters can be tested (i.e. the minmum distance between consecutive loci, and the minimum and maximum of sites per loci).
 
 ___
 ## Excluding species from sequence alignments
