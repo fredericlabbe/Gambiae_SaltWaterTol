@@ -10,7 +10,7 @@ usage: python ExclSpecPhyl.py --species spA
 import glob
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument('-s', "--species", required=True, help='species to exclude from multiple sequence alignments')
+parser.add_argument('-s', "--species", required = True, help = 'species to exclude from multiple sequence alignments')
 args = parser.parse_args()
 
 def ExclSpecPhyl(species):
