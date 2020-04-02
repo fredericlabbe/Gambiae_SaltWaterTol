@@ -13,7 +13,7 @@ import glob
 import shutil
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument('-p', "--prop", type=float, required=True, help='maximum proportion of gap in the alignment')
+parser.add_argument('-p', "--prop", type = float, required = True, help = 'maximum proportion of gap in the alignment')
 args = parser.parse_args()
 
 def FltPropGap(prop):
