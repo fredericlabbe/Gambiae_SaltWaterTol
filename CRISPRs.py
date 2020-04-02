@@ -18,8 +18,8 @@ from Bio.Seq import Seq
 import re
 import argparse
 parser = argparse.ArgumentParser()
-parser.add_argument('-s', "--size", default=18, help='size of the CRISPR target site without the PAM sequence, default is 18')
-parser.add_argument('-r', "--ref", required=True, help='reference genome in FASTA format')
+parser.add_argument('-s', "--size", default = 18, help = 'size of the CRISPR target site without the PAM sequence, default is 18')
+parser.add_argument('-r', "--ref", required = True, help = 'reference genome in FASTA format')
 args = parser.parse_args()
 
 def FindCRISPRs(InputFile, size):
