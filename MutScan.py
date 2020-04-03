@@ -27,6 +27,7 @@ def SeqDict(file):
     g = open(Outputfile2, 'w')    
     for fasta in fasta_sequences:
         header, sequence = fasta.id, str(fasta.seq)
+        sequence = sequence.replace("-", "N")
         if len(sequence)%3 == 0:
             protein = translate(sequence)
             if "*" in protein:
@@ -37,22 +38,23 @@ def SeqDict(file):
                     sequence = sequence[1:len(sequence)]
                     sequence = "".join((sequence, "N"))
                     protein = translate(sequence)
-                    f.write(">{}\n{}\n".format(header, sequence))
-                    g.write(">{}\n{}\n".format(header, protein))
-                    for pos in range(0, len(sequence)):
-                        if int(pos%3) == 0:
-                            codon = "%s%s%s" % (sequence[int(pos)], sequence[int(pos + 1)], sequence[int(pos + 2)])
-                            result = [header, sequence[int(pos)], codon, protein[pos/3]]
-                            if pos not in seqdict.keys():
-                                seqdict[pos] = [result]
+                    if "*" not in protein:
+                        f.write(">{}\n{}\n".format(header, sequence))
+                        g.write(">{}\n{}\n".format(header, protein))
+                        for pos in range(0, len(sequence)):
+                            if int(pos%3) == 0:
+                                codon = "%s%s%s" % (sequence[int(pos)], sequence[int(pos + 1)], sequence[int(pos + 2)])
+                                result = [header, sequence[int(pos)], codon, protein[pos/3]]
+                                if pos not in seqdict.keys():
+                                    seqdict[pos] = [result]
+                                else:
+                                    seqdict[pos].append(result)
                             else:
-                                seqdict[pos].append(result)
-                        else:
-                            result = [header, sequence[int(pos)], codon, protein[int(pos/3)]]
-                            if pos not in seqdict.keys():
-                                seqdict[pos] = [result]
-                            else:
-                                seqdict[pos].append(result)
+                                result = [header, sequence[int(pos)], codon, protein[int(pos/3)]]
+                                if pos not in seqdict.keys():
+                                    seqdict[pos] = [result]
+                                else:
+                                    seqdict[pos].append(result)
                 else:
                     f.write(">{}\n{}\n".format(header, sequence))
                     g.write(">{}\n{}\n".format(header, protein))
@@ -99,22 +101,23 @@ def SeqDict(file):
                         sequence = sequence[1:len(sequence)]
                         sequence = "".join((sequence, "N"))
                         protein = translate(sequence)
-                        f.write(">{}\n{}\n".format(header, sequence))
-                        g.write(">{}\n{}\n".format(header, protein))
-                        for pos in range(0, len(sequence)):
-                            if int(pos%3) == 0:
-                                codon = "%s%s%s" % (sequence[int(pos)], sequence[int(pos + 1)], sequence[int(pos + 2)])
-                                result = [header, sequence[int(pos)], codon, protein[pos/3]]
-                                if pos not in seqdict.keys():
-                                    seqdict[pos] = [result]
+                        if "*" not in protein:
+                            f.write(">{}\n{}\n".format(header, sequence))
+                            g.write(">{}\n{}\n".format(header, protein))
+                            for pos in range(0, len(sequence)):
+                                if int(pos%3) == 0:
+                                    codon = "%s%s%s" % (sequence[int(pos)], sequence[int(pos + 1)], sequence[int(pos + 2)])
+                                    result = [header, sequence[int(pos)], codon, protein[pos/3]]
+                                    if pos not in seqdict.keys():
+                                        seqdict[pos] = [result]
+                                    else:
+                                        seqdict[pos].append(result)
                                 else:
-                                    seqdict[pos].append(result)
-                            else:
-                                result = [header, sequence[int(pos)], codon, protein[int(pos/3)]]
-                                if pos not in seqdict.keys():
-                                    seqdict[pos] = [result]
-                                else:
-                                    seqdict[pos].append(result)
+                                    result = [header, sequence[int(pos)], codon, protein[int(pos/3)]]
+                                    if pos not in seqdict.keys():
+                                        seqdict[pos] = [result]
+                                    else:
+                                        seqdict[pos].append(result)
                     else:
                         f.write(">{}\n{}\n".format(header, sequence))
                         g.write(">{}\n{}\n".format(header, protein))
@@ -161,22 +164,23 @@ def SeqDict(file):
                             sequence = sequence[1:len(sequence)]
                             sequence = "".join((sequence, "N"))
                             protein = translate(sequence)
-                            f.write(">{}\n{}\n".format(header, sequence))
-                            g.write(">{}\n{}\n".format(header, protein))
-                            for pos in range(0, len(sequence)):
-                                if int(pos%3) == 0:
-                                    codon = "%s%s%s" % (sequence[int(pos)], sequence[int(pos + 1)], sequence[int(pos + 2)])
-                                    result = [header, sequence[int(pos)], codon, protein[pos/3]]
-                                    if pos not in seqdict.keys():
-                                        seqdict[pos] = [result]
+                            if "*" not in protein:
+                                f.write(">{}\n{}\n".format(header, sequence))
+                                g.write(">{}\n{}\n".format(header, protein))
+                                for pos in range(0, len(sequence)):
+                                    if int(pos%3) == 0:
+                                        codon = "%s%s%s" % (sequence[int(pos)], sequence[int(pos + 1)], sequence[int(pos + 2)])
+                                        result = [header, sequence[int(pos)], codon, protein[pos/3]]
+                                        if pos not in seqdict.keys():
+                                            seqdict[pos] = [result]
+                                        else:
+                                            seqdict[pos].append(result)
                                     else:
-                                        seqdict[pos].append(result)
-                                else:
-                                    result = [header, sequence[int(pos)], codon, protein[int(pos/3)]]
-                                    if pos not in seqdict.keys():
-                                        seqdict[pos] = [result]
-                                    else:
-                                        seqdict[pos].append(result)
+                                        result = [header, sequence[int(pos)], codon, protein[int(pos/3)]]
+                                        if pos not in seqdict.keys():
+                                            seqdict[pos] = [result]
+                                        else:
+                                            seqdict[pos].append(result)
                         else:
                             f.write(">{}\n{}\n".format(header, sequence))
                             g.write(">{}\n{}\n".format(header, protein))
