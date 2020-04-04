@@ -30,15 +30,18 @@ def SeqDict(file):
         sequence = sequence.replace("-", "N")
         if len(sequence)%3 == 0:
             protein = translate(sequence)
-            if "*" in protein:
+            if "*" in protein[0:len(protein) - 1]:
                 sequence = sequence[1:len(sequence)]
                 sequence = "".join((sequence, "N"))
                 protein = translate(sequence)
-                if "*" in protein:
+                if "*" in protein[0:len(protein) - 2]:
                     sequence = sequence[1:len(sequence)]
                     sequence = "".join((sequence, "N"))
                     protein = translate(sequence)
-                    if "*" not in protein:
+                    if "*" in protein[0:len(protein) - 2]:
+                        f.write(">{}\nThe nucleotide sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
+                        g.write(">{}\nThe amino-acid sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
+                    else:
                         f.write(">{}\n{}\n".format(header, sequence))
                         g.write(">{}\n{}\n".format(header, protein))
                         for pos in range(0, len(sequence)):
@@ -93,15 +96,18 @@ def SeqDict(file):
             sequence = "".join((sequence, "N"))
             if len(sequence)%3 == 0:
                 protein = translate(sequence)
-                if "*" in protein:
+                if "*" in protein[0:len(protein) - 2]:
                     sequence = sequence[1:len(sequence)]
                     sequence = "".join((sequence, "N"))
                     protein = translate(sequence)
-                    if "*" in protein:
+                    if "*" in protein[0:len(protein) - 2]:
                         sequence = sequence[1:len(sequence)]
                         sequence = "".join((sequence, "N"))
                         protein = translate(sequence)
-                        if "*" not in protein:
+                        if "*" in protein[0:len(protein) - 2]:
+                            f.write(">{}\nThe nucleotide sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
+                            g.write(">{}\nThe amino-acid sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
+                        else:
                             f.write(">{}\n{}\n".format(header, sequence))
                             g.write(">{}\n{}\n".format(header, protein))
                             for pos in range(0, len(sequence)):
@@ -156,15 +162,18 @@ def SeqDict(file):
                 sequence = "".join((sequence, "N"))
                 if len(sequence)%3 == 0:
                     protein = translate(sequence)
-                    if "*" in protein:
+                    if "*" in protein[0:len(protein) - 2]:
                         sequence = sequence[1:len(sequence)]
                         sequence = "".join((sequence, "N"))
                         protein = translate(sequence)
-                        if "*" in protein:
+                        if "*" in protein[0:len(protein) - 2]:
                             sequence = sequence[1:len(sequence)]
                             sequence = "".join((sequence, "N"))
                             protein = translate(sequence)
-                            if "*" not in protein:
+                            if "*" in protein[0:len(protein) - 3]:
+                                f.write(">{}\nThe nucleotide sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
+                                g.write(">{}\nThe amino-acid sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
+                            else:
                                 f.write(">{}\n{}\n".format(header, sequence))
                                 g.write(">{}\n{}\n".format(header, protein))
                                 for pos in range(0, len(sequence)):
