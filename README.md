@@ -65,15 +65,16 @@ The script `ExclSpecPhyl.py` needs to be run from the directory containing the s
 
 ___
 ## Filtering sequence alignments
-The script `FltPropGap.py` filters each sequence alignment in [PHYLIP](http://rosalind.info/glossary/phylip-format/) format (.phy) that has fewer than a maximum proportion of gap (e.g. 50%). This script will move each sequence alignment that passed the filter to the `1_Keep` directory, and move each sequence alignment that did not pass the filter to the `2_Remove` directory.
+The script `FltProGapMis.py` filters each sequence alignment in [PHYLIP](http://rosalind.info/glossary/phylip-format/) format (.phy) that has fewer than a maximum proportion of gap and missing nucleotides (e.g. 50%). This script will move each sequence alignment that passed the filter to the `1_Keep` directory, and move each sequence alignment that did not pass the filter to the `2_Remove` directory.
 
 #### Example command
-`python FltPropGap.py --prop 0.5`
+`python FltProGapMis.py --prop 0.5`
 
-`python FltPropGap.py -h` Will print a full list of command arguments.
+`python FltProGapMis.py -h` Will print a full list of command arguments.
 
 #### Notes
-The script `FltPropGap.py` needs to be run from the directory containing the sequence alignments to filter.
+The script `FltProGapMis.py` needs to be run from the directory containing the sequence alignments to filter.
+To run it, ensure that you are using Python v.2.7, and have installed the following dependencies: os, glob, shutil, and argparse.
 
 ___
 ## Adapting BPP control files
