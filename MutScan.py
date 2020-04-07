@@ -22,26 +22,41 @@ def SeqDict(file):
     seqdict = {}
     Outputfile1 = file.replace(".fa", "_ORF.fa")
     Outputfile2 = file.replace(".fa", "_ORF_AA.fa")
-    fasta_sequences = SeqIO.parse(file, 'fasta')
-    f = open(Outputfile1, 'w')
-    g = open(Outputfile2, 'w')    
-    for fasta in fasta_sequences:
-        header, sequence = fasta.id, str(fasta.seq)
-        sequence = sequence.replace("-", "N")
-        if len(sequence)%3 == 0:
-            protein = translate(sequence)
-            if "*" in protein[0:len(protein) - 1]:
-                sequence = sequence[1:len(sequence)]
-                sequence = "".join((sequence, "N"))
-                protein = translate(sequence)
-                if "*" in protein[0:len(protein) - 2]:
-                    sequence = sequence[1:len(sequence)]
-                    sequence = "".join((sequence, "N"))
-                    protein = translate(sequence)
-                    if "*" in protein[0:len(protein) - 2]:
+    records = list(SeqIO.parse(file, "fasta"))
+    seq = str(records[0].seq)
+    seq = seq.replace("-", "N")
+    if len(seq)%3 == 0:
+        prot = translate(seq)
+        if "*" in prot[0:len(prot) - 1]:
+            seq = seq[1:len(seq)]
+            seq = "".join((seq, "N"))
+            prot = translate(seq)
+            if "*" in prot[0:len(prot) - 2]:
+                seq = seq[1:len(seq)]
+                seq = "".join((seq, "N"))
+                prot = translate(seq)
+                if "*" in prot[0:len(prot) - 2]:
+                    f = open(Outputfile1, 'w')
+                    g = open(Outputfile2, 'w')
+                    fasta_sequences = SeqIO.parse(file, 'fasta')
+                    for fasta in fasta_sequences:
+                        header, sequence = fasta.id, str(fasta.seq)
                         f.write(">{}\nThe nucleotide sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
                         g.write(">{}\nThe amino-acid sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
-                    else:
+                    f.close()
+                    g.close()
+                    return seqdict
+                else:
+                    seqdict = {}
+                    f = open(Outputfile1, 'w')
+                    g = open(Outputfile2, 'w')
+                    fasta_sequences = SeqIO.parse(file, 'fasta')
+                    for fasta in fasta_sequences:
+                        header, sequence = fasta.id, str(fasta.seq)
+                        sequence = sequence[2:len(sequence)]
+                        sequence = sequence.replace("-", "N")
+                        sequence = "".join((sequence, "NN"))
+                        protein = translate(sequence)
                         f.write(">{}\n{}\n".format(header, sequence))
                         g.write(">{}\n{}\n".format(header, protein))
                         for pos in range(0, len(sequence)):
@@ -58,7 +73,19 @@ def SeqDict(file):
                                     seqdict[pos] = [result]
                                 else:
                                     seqdict[pos].append(result)
-                else:
+                    f.close()
+                    g.close()
+                    return seqdict
+            else:
+                f = open(Outputfile1, 'w')
+                g = open(Outputfile2, 'w')
+                fasta_sequences = SeqIO.parse(file, 'fasta')
+                for fasta in fasta_sequences:
+                    header, sequence = fasta.id, str(fasta.seq)
+                    sequence = sequence[1:len(sequence)]
+                    sequence = sequence.replace("-", "N")
+                    sequence = "".join((sequence, "N"))
+                    protein = translate(sequence)
                     f.write(">{}\n{}\n".format(header, sequence))
                     g.write(">{}\n{}\n".format(header, protein))
                     for pos in range(0, len(sequence)):
@@ -75,7 +102,17 @@ def SeqDict(file):
                                 seqdict[pos] = [result]
                             else:
                                 seqdict[pos].append(result)
-            else:
+                f.close()
+                g.close()
+                return seqdict
+        else:
+            f = open(Outputfile1, 'w')
+            g = open(Outputfile2, 'w')
+            fasta_sequences = SeqIO.parse(file, 'fasta')
+            for fasta in fasta_sequences:
+                header, sequence = fasta.id, str(fasta.seq)
+                sequence = sequence.replace("-", "N")
+                protein = translate(sequence)
                 f.write(">{}\n{}\n".format(header, sequence))
                 g.write(">{}\n{}\n".format(header, protein))
                 for pos in range(0, len(sequence)):
@@ -92,22 +129,42 @@ def SeqDict(file):
                             seqdict[pos] = [result]
                         else:
                             seqdict[pos].append(result)
-        else:
-            sequence = "".join((sequence, "N"))
-            if len(sequence)%3 == 0:
-                protein = translate(sequence)
-                if "*" in protein[0:len(protein) - 2]:
-                    sequence = sequence[1:len(sequence)]
-                    sequence = "".join((sequence, "N"))
-                    protein = translate(sequence)
-                    if "*" in protein[0:len(protein) - 2]:
-                        sequence = sequence[1:len(sequence)]
-                        sequence = "".join((sequence, "N"))
-                        protein = translate(sequence)
-                        if "*" in protein[0:len(protein) - 2]:
+            f.close()
+            g.close()
+            return seqdict
+    else:
+        seq = "".join((seq, "N"))
+        if len(seq)%3 == 0:
+            prot = translate(seq)
+            if "*" in prot[0:len(prot) - 2]:
+                seq = seq[1:len(seq)]
+                seq = "".join((seq, "N"))
+                prot = translate(seq)
+                if "*" in prot[0:len(prot) - 2]:
+                    seq = seq[1:len(seq)]
+                    seq = "".join((seq, "N"))
+                    prot = translate(seq)
+                    if "*" in prot[0:len(prot) - 2]:
+                        f = open(Outputfile1, 'w')
+                        g = open(Outputfile2, 'w')
+                        fasta_sequences = SeqIO.parse(file, 'fasta')
+                        for fasta in fasta_sequences:
+                            header, sequence = fasta.id, str(fasta.seq)
                             f.write(">{}\nThe nucleotide sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
                             g.write(">{}\nThe amino-acid sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
-                        else:
+                        f.close()
+                        g.close()
+                        return seqdict
+                    else:
+                        f = open(Outputfile1, 'w')
+                        g = open(Outputfile2, 'w')
+                        fasta_sequences = SeqIO.parse(file, 'fasta')
+                        for fasta in fasta_sequences:
+                            header, sequence = fasta.id, str(fasta.seq)
+                            sequence = sequence[2:len(sequence)]
+                            sequence = sequence.replace("-", "N")
+                            sequence = "".join((sequence, "NNN"))
+                            protein = translate(sequence)
                             f.write(">{}\n{}\n".format(header, sequence))
                             g.write(">{}\n{}\n".format(header, protein))
                             for pos in range(0, len(sequence)):
@@ -124,7 +181,19 @@ def SeqDict(file):
                                         seqdict[pos] = [result]
                                     else:
                                         seqdict[pos].append(result)
-                    else:
+                        f.close()
+                        g.close()
+                        return seqdict
+                else:
+                    f = open(Outputfile1, 'w')
+                    g = open(Outputfile2, 'w')
+                    fasta_sequences = SeqIO.parse(file, 'fasta')
+                    for fasta in fasta_sequences:
+                        header, sequence = fasta.id, str(fasta.seq)
+                        sequence = sequence[1:len(sequence)]
+                        sequence = sequence.replace("-", "N")
+                        sequence = "".join((sequence, "NN"))
+                        protein = translate(sequence)
                         f.write(">{}\n{}\n".format(header, sequence))
                         g.write(">{}\n{}\n".format(header, protein))
                         for pos in range(0, len(sequence)):
@@ -141,7 +210,18 @@ def SeqDict(file):
                                     seqdict[pos] = [result]
                                 else:
                                     seqdict[pos].append(result)
-                else:
+                    f.close()
+                    g.close()
+                    return seqdict
+            else:
+                f = open(Outputfile1, 'w')
+                g = open(Outputfile2, 'w')
+                fasta_sequences = SeqIO.parse(file, 'fasta')
+                for fasta in fasta_sequences:
+                    header, sequence = fasta.id, str(fasta.seq)
+                    sequence = sequence.replace("-", "N")
+                    sequence = "".join((sequence, "N"))
+                    protein = translate(sequence)
                     f.write(">{}\n{}\n".format(header, sequence))
                     g.write(">{}\n{}\n".format(header, protein))
                     for pos in range(0, len(sequence)):
@@ -158,22 +238,42 @@ def SeqDict(file):
                                 seqdict[pos] = [result]
                             else:
                                 seqdict[pos].append(result)
-            else:
-                sequence = "".join((sequence, "N"))
-                if len(sequence)%3 == 0:
-                    protein = translate(sequence)
-                    if "*" in protein[0:len(protein) - 2]:
-                        sequence = sequence[1:len(sequence)]
-                        sequence = "".join((sequence, "N"))
-                        protein = translate(sequence)
-                        if "*" in protein[0:len(protein) - 2]:
-                            sequence = sequence[1:len(sequence)]
-                            sequence = "".join((sequence, "N"))
-                            protein = translate(sequence)
-                            if "*" in protein[0:len(protein) - 3]:
+                f.close()
+                g.close()
+                return seqdict
+        else:
+            seq = "".join((seq, "N"))
+            if len(seq)%3 == 0:
+                prot = translate(seq)
+                if "*" in prot[0:len(prot) - 2]:
+                    seq = seq[1:len(seq)]
+                    seq = "".join((seq, "N"))
+                    prot = translate(seq)
+                    if "*" in prot[0:len(prot) - 2]:
+                        seq = seq[1:len(seq)]
+                        seq = "".join((seq, "N"))
+                        prot = translate(seq)
+                        if "*" in prot[0:len(prot) - 3]:
+                            f = open(Outputfile1, 'w')
+                            g = open(Outputfile2, 'w')
+                            fasta_sequences = SeqIO.parse(file, 'fasta')
+                            for fasta in fasta_sequences:
+                                header, sequence = fasta.id, str(fasta.seq)
                                 f.write(">{}\nThe nucleotide sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
                                 g.write(">{}\nThe amino-acid sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
-                            else:
+                            f.close()
+                            g.close()
+                            return seqdict
+                        else:
+                            f = open(Outputfile1, 'w')
+                            g = open(Outputfile2, 'w')
+                            fasta_sequences = SeqIO.parse(file, 'fasta')
+                            for fasta in fasta_sequences:
+                                header, sequence = fasta.id, str(fasta.seq)
+                                sequence = sequence[2:len(sequence)]
+                                sequence = sequence.replace("-", "N")
+                                sequence = "".join((sequence, "NNNN"))
+                                protein = translate(sequence)
                                 f.write(">{}\n{}\n".format(header, sequence))
                                 g.write(">{}\n{}\n".format(header, protein))
                                 for pos in range(0, len(sequence)):
@@ -190,7 +290,19 @@ def SeqDict(file):
                                             seqdict[pos] = [result]
                                         else:
                                             seqdict[pos].append(result)
-                        else:
+                            f.close()
+                            g.close()
+                            return seqdict
+                    else:
+                        f = open(Outputfile1, 'w')
+                        g = open(Outputfile2, 'w')
+                        fasta_sequences = SeqIO.parse(file, 'fasta')
+                        for fasta in fasta_sequences:
+                            header, sequence = fasta.id, str(fasta.seq)
+                            sequence = sequence[1:len(sequence)]
+                            sequence = sequence.replace("-", "N")
+                            sequence = "".join((sequence, "NNN"))
+                            protein = translate(sequence)
                             f.write(">{}\n{}\n".format(header, sequence))
                             g.write(">{}\n{}\n".format(header, protein))
                             for pos in range(0, len(sequence)):
@@ -207,7 +319,18 @@ def SeqDict(file):
                                         seqdict[pos] = [result]
                                     else:
                                         seqdict[pos].append(result)
-                    else:
+                        f.close()
+                        g.close()
+                        return seqdict
+                else:
+                    f = open(Outputfile1, 'w')
+                    g = open(Outputfile2, 'w')
+                    fasta_sequences = SeqIO.parse(file, 'fasta')
+                    for fasta in fasta_sequences:
+                        header, sequence = fasta.id, str(fasta.seq)
+                        sequence = sequence.replace("-", "N")
+                        sequence = "".join((sequence, "NN"))
+                        protein = translate(sequence)
                         f.write(">{}\n{}\n".format(header, sequence))
                         g.write(">{}\n{}\n".format(header, protein))
                         for pos in range(0, len(sequence)):
@@ -224,9 +347,9 @@ def SeqDict(file):
                                     seqdict[pos] = [result]
                                 else:
                                     seqdict[pos].append(result)
-    f.close()
-    g.close()
-    return seqdict
+                    f.close()
+                    g.close()
+                    return seqdict
 
 def MutScan(group1, group2):
     files = glob.glob('*.fa')
