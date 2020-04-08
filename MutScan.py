@@ -24,7 +24,9 @@ def SeqDict(file):
     Outputfile2 = file.replace(".fa", "_ORF_AA.fa")
     records = list(SeqIO.parse(file, "fasta"))
     seq = str(records[0].seq)
-    seq = seq.replace("-", "N")
+    gap = "N" * seq.count('-')
+    seq = seq.replace("-", "")
+    seq = "".join((seq, gap))
     if len(seq)%3 == 0:
         prot = translate(seq)
         if "*" in prot[0:len(prot) - 1]:
@@ -54,8 +56,9 @@ def SeqDict(file):
                     for fasta in fasta_sequences:
                         header, sequence = fasta.id, str(fasta.seq)
                         sequence = sequence[2:len(sequence)]
-                        sequence = sequence.replace("-", "N")
-                        sequence = "".join((sequence, "NN"))
+                        gaps = "N" * sequence.count('-')
+                        sequence = sequence.replace("-", "")
+                        sequence = "".join((sequence, "NN", gaps))
                         protein = translate(sequence)
                         f.write(">{}\n{}\n".format(header, sequence))
                         g.write(">{}\n{}\n".format(header, protein))
@@ -83,8 +86,9 @@ def SeqDict(file):
                 for fasta in fasta_sequences:
                     header, sequence = fasta.id, str(fasta.seq)
                     sequence = sequence[1:len(sequence)]
-                    sequence = sequence.replace("-", "N")
-                    sequence = "".join((sequence, "N"))
+                    gaps = "N" * sequence.count('-')
+                    sequence = sequence.replace("-", "")
+                    sequence = "".join((sequence, "N", gaps))
                     protein = translate(sequence)
                     f.write(">{}\n{}\n".format(header, sequence))
                     g.write(">{}\n{}\n".format(header, protein))
@@ -111,7 +115,9 @@ def SeqDict(file):
             fasta_sequences = SeqIO.parse(file, 'fasta')
             for fasta in fasta_sequences:
                 header, sequence = fasta.id, str(fasta.seq)
-                sequence = sequence.replace("-", "N")
+                gaps = "N" * sequence.count('-')
+                sequence = "".join((sequence, gaps))
+                sequence = sequence.replace("-", "")
                 protein = translate(sequence)
                 f.write(">{}\n{}\n".format(header, sequence))
                 g.write(">{}\n{}\n".format(header, protein))
@@ -162,8 +168,9 @@ def SeqDict(file):
                         for fasta in fasta_sequences:
                             header, sequence = fasta.id, str(fasta.seq)
                             sequence = sequence[2:len(sequence)]
-                            sequence = sequence.replace("-", "N")
-                            sequence = "".join((sequence, "NNN"))
+                            gaps = "N" * sequence.count('-')
+                            sequence = sequence.replace("-", "")
+                            sequence = "".join((sequence, "NNN", gaps))
                             protein = translate(sequence)
                             f.write(">{}\n{}\n".format(header, sequence))
                             g.write(">{}\n{}\n".format(header, protein))
@@ -191,8 +198,9 @@ def SeqDict(file):
                     for fasta in fasta_sequences:
                         header, sequence = fasta.id, str(fasta.seq)
                         sequence = sequence[1:len(sequence)]
-                        sequence = sequence.replace("-", "N")
-                        sequence = "".join((sequence, "NN"))
+                        gaps = "N" * sequence.count('-')
+                        sequence = sequence.replace("-", "")
+                        sequence = "".join((sequence, "NN", gaps))
                         protein = translate(sequence)
                         f.write(">{}\n{}\n".format(header, sequence))
                         g.write(">{}\n{}\n".format(header, protein))
@@ -219,8 +227,9 @@ def SeqDict(file):
                 fasta_sequences = SeqIO.parse(file, 'fasta')
                 for fasta in fasta_sequences:
                     header, sequence = fasta.id, str(fasta.seq)
-                    sequence = sequence.replace("-", "N")
-                    sequence = "".join((sequence, "N"))
+                    gaps = "N" * sequence.count('-')
+                    sequence = sequence.replace("-", "")
+                    sequence = "".join((sequence, "N", gaps))
                     protein = translate(sequence)
                     f.write(">{}\n{}\n".format(header, sequence))
                     g.write(">{}\n{}\n".format(header, protein))
@@ -271,8 +280,9 @@ def SeqDict(file):
                             for fasta in fasta_sequences:
                                 header, sequence = fasta.id, str(fasta.seq)
                                 sequence = sequence[2:len(sequence)]
-                                sequence = sequence.replace("-", "N")
-                                sequence = "".join((sequence, "NNNN"))
+                                gaps = "N" * sequence.count('-')
+                                sequence = sequence.replace("-", "")
+                                sequence = "".join((sequence, "NNNN", gaps))
                                 protein = translate(sequence)
                                 f.write(">{}\n{}\n".format(header, sequence))
                                 g.write(">{}\n{}\n".format(header, protein))
@@ -300,8 +310,9 @@ def SeqDict(file):
                         for fasta in fasta_sequences:
                             header, sequence = fasta.id, str(fasta.seq)
                             sequence = sequence[1:len(sequence)]
-                            sequence = sequence.replace("-", "N")
-                            sequence = "".join((sequence, "NNN"))
+                            gaps = "N" * sequence.count('-')
+                            sequence = sequence.replace("-", "")
+                            sequence = "".join((sequence, "NNN", gaps))
                             protein = translate(sequence)
                             f.write(">{}\n{}\n".format(header, sequence))
                             g.write(">{}\n{}\n".format(header, protein))
@@ -328,8 +339,9 @@ def SeqDict(file):
                     fasta_sequences = SeqIO.parse(file, 'fasta')
                     for fasta in fasta_sequences:
                         header, sequence = fasta.id, str(fasta.seq)
-                        sequence = sequence.replace("-", "N")
-                        sequence = "".join((sequence, "NN"))
+                        gaps = "N" * sequence.count('-')
+                        sequence = sequence.replace("-", "")
+                        sequence = "".join((sequence, "NN", gaps))
                         protein = translate(sequence)
                         f.write(">{}\n{}\n".format(header, sequence))
                         g.write(">{}\n{}\n".format(header, protein))
