@@ -69,10 +69,10 @@ To run it, ensure that you are using Python v.2.7, and have installed the follow
 
 ___
 ## Filtering sequence alignments
-The script `FltProGapMis.py` filters each sequence alignment in [PHYLIP](http://rosalind.info/glossary/phylip-format/) format (.phy) that has fewer than a maximum proportion of gap and missing nucleotides (e.g. 50%). This script will move each sequence alignment that passed the filter to the `1_Keep` directory, and move each sequence alignment that did not pass the filter to the `2_Remove` directory.
+The script `FltProGapMis.py` filters each sequence alignment in [PHYLIP](http://rosalind.info/glossary/phylip-format/) format (.phy) that has fewer than a maximum proportion of gap and missing nucleotides (e.g. 50%), and having a minimum length (e.g. 51 nucleotides). This script will move each sequence alignment that passed the filter to the `1_Keep` directory, and move each sequence alignment that did not pass the filter to the `2_Remove` directory.
 
 #### Example command
-`python FltProGapMis.py --prop 0.5`
+`python FltProGapMis.py --prop 0.5 --length 51`
 
 `python FltProGapMis.py -h` Will print a full list of command arguments.
 
