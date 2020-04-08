@@ -22,7 +22,7 @@ def FltProGapMis(prop, length):
     keep_directory = os.path.join(current_directory, r'1_Keep')
     if not os.path.exists(keep_directory):
         os.makedirs(keep_directory)  
-        rem_directory = os.path.join(current_directory, r'2_Remove')
+    rem_directory = os.path.join(current_directory, r'2_Remove')
     if not os.path.exists(rem_directory):
         os.makedirs(rem_directory)
     files = glob.glob('*.phy')
@@ -30,8 +30,8 @@ def FltProGapMis(prop, length):
         with open(file, 'r') as phy:
             header = phy.readline()
             headsp = header.split()
-            length = int(headsp[1])
-            maxgap = int(length * prop)
+            size = int(headsp[1])
+            maxgap = int(size * prop)
             nbgaps = list()
             nbnucl = list()
             for line in phy:
@@ -42,6 +42,7 @@ def FltProGapMis(prop, length):
                 nuc = x[1].count('A') + x[1].count('C') + x[1].count('G') + x[1].count('T')
                 nbnucl.append(int(nuc))
             nbgaps.sort(reverse = True)
+            nbnucl.sort(reverse = False)
         if nbgaps[0] < maxgap and nbnucl[0] >= length:
             shutil.move(file, keep_directory)
         else:
