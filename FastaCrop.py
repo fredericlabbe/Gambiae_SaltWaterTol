@@ -47,8 +47,14 @@ def FastaCrop(ref):
                 for fasta in fasta_sequences:
                     header, sequence = fasta.id, str(fasta.seq)
                     if header == ref:
-                        stopgap = sequence[len(sequence) - stopdif:len(sequence)].count('-')
-                        sequence = sequence
+                        stopping = len(sequence) - 1
+                        stopgap = 0
+                        while stopgap < stopdif and stopping > 0:
+                            if sequence[stopping] == '-':
+                                stopping = stopping - 1                                
+                            else:
+                                stopgap = stopgap + 1
+                                stopping = stopping - 1
                         beginning = 0
                         startgap = 0
                         while startgap < startdif and beginning < len(sequence):
@@ -57,7 +63,7 @@ def FastaCrop(ref):
                             else:
                                 startgap = startgap + 1
                                 beginning = beginning + 1
-                    sequence2 = sequence[beginning:(len(sequence) - stopdif - stopgap)]
+                    sequence2 = sequence[beginning:stopping + 1]
                     f.write(">{}\n{}\n".format(header, sequence2))
                 f.close()
                 shutil.move(Outputfile, crop_directory)
