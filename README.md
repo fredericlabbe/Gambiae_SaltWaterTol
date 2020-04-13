@@ -12,7 +12,7 @@ Not everything is documented yet, but most scripts have some helpful information
 * [Filtering sequence alignments](#Filtering-sequence-alignments)
 * [Adapting BPP control files](#Adapting-BPP-control-files)
 * [Extracting best trees](#Extracting-best-trees)
-* [Scanning nonsynonymous/synonymous mutations](#Scanning-nonsynonymous/synonymous-mutationss)
+* [Scanning nonsynonymous-synonymous mutations](#Scanning-nonsynonymous-synonymous-mutationss)
 * [Summarizing divergence times](#Summarizing-divergence-times)
 * [Plotting population genomic statistics](#Plotting-population-genomic-statistics)
 
@@ -106,7 +106,7 @@ The script `ExtrBestTree.py` needs to be run from the directory containing the r
 To run it, ensure that you are using Python v.2.7, and have installed the following dependencies: re, and glob.
 
 ___
-## Scanning nonsynonymous/synonymous mutations
+## Scanning nonsynonymous-synonymous mutations
 The script `MutScan.py` scans nucleotide sequence alignments (in [FASTA](https://www.bioinformatics.nl/tools/crab_fasta.html) format), compares the nucleotide and amino-acid sequences between two aligned sets of species, and identifies the nonsynonymous and synonymous mutations. The script also checks the open reading frame (ORF), and translates the nucleotide sequences into amino-acid sequences. For each alignment, the nonsynonymous and synonymous mutations will be stored in a file (`file_MutScan.out`), and the nucleotide and amino-acid sequences will be exported into new FASTA files (`file_ORF.fa` and `file_ORF_AA.fa`, respectively).
 
 #### Example command
