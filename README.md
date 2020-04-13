@@ -12,7 +12,7 @@ Not everything is documented yet, but most scripts have some helpful information
 * [Filtering sequence alignments](#Filtering-sequence-alignments)
 * [Adapting BPP control files](#Adapting-BPP-control-files)
 * [Extracting best trees](#Extracting-best-trees)
-* [Scanning nonsynonymous-synonymous mutations](#Scanning-nonsynonymous-synonymous-mutationss)
+* [Scanning nonsynonymous-synonymous mutations](#Scanning-nonsynonymous-synonymous-mutations)
 * [Summarizing divergence times](#Summarizing-divergence-times)
 * [Plotting population genomic statistics](#Plotting-population-genomic-statistics)
 
