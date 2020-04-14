@@ -53,10 +53,10 @@ def SeqDict(file):
                                 codon = "%s%s%s" % (sequence[int(pos)], sequence[int(pos + 1)], sequence[int(pos + 2)])
                                 aa = translate(codon)
                                 result = [header, sequence[int(pos)], codon, aa]
-                                if pos not in seqdict.keys():
-                                    seqdict[pos] = [result]
+                                if pos + 2 not in seqdict.keys():
+                                    seqdict[pos + 2] = [result]
                                 else:
-                                    seqdict[pos].append(result)
+                                    seqdict[pos + 2].append(result)
                                 pos = pos + 3
                 else:
                     f.write(">{}\n{}\n".format(header, sequence))
@@ -67,10 +67,10 @@ def SeqDict(file):
                             codon = "%s%s%s" % (sequence[int(pos)], sequence[int(pos + 1)], sequence[int(pos + 2)])
                             aa = translate(codon)
                             result = [header, sequence[int(pos)], codon, aa]
-                            if pos not in seqdict.keys():
-                                seqdict[pos] = [result]
+                            if pos + 1 not in seqdict.keys():
+                                seqdict[pos + 1] = [result]
                             else:
-                                seqdict[pos].append(result)
+                                seqdict[pos + 1].append(result)
                             pos = pos + 3
             else:
                 f.write(">{}\n{}\n".format(header, sequence))
@@ -110,10 +110,10 @@ def SeqDict(file):
                                     codon = "%s%s%s" % (sequence[int(pos)], sequence[int(pos + 1)], sequence[int(pos + 2)])
                                     aa = translate(codon)
                                     result = [header, sequence[int(pos)], codon, aa]
-                                    if pos not in seqdict.keys():
-                                        seqdict[pos] = [result]
+                                    if pos + 2 not in seqdict.keys():
+                                        seqdict[pos + 2] = [result]
                                     else:
-                                        seqdict[pos].append(result)
+                                        seqdict[pos + 2].append(result)
                                     pos = pos + 3
                     else:
                         f.write(">{}\n{}\n".format(header, sequence))
@@ -124,10 +124,10 @@ def SeqDict(file):
                                 codon = "%s%s%s" % (sequence[int(pos)], sequence[int(pos + 1)], sequence[int(pos + 2)])
                                 aa = translate(codon)
                                 result = [header, sequence[int(pos)], codon, aa]
-                                if pos not in seqdict.keys():
-                                    seqdict[pos] = [result]
+                                if pos + 1 not in seqdict.keys():
+                                    seqdict[pos + 1] = [result]
                                 else:
-                                    seqdict[pos].append(result)
+                                    seqdict[pos + 1].append(result)
                                 pos = pos + 3
                 else:
                     f.write(">{}\n{}\n".format(header, sequence))
@@ -167,10 +167,10 @@ def SeqDict(file):
                                         codon = "%s%s%s" % (sequence[int(pos)], sequence[int(pos + 1)], sequence[int(pos + 2)])
                                         aa = translate(codon)
                                         result = [header, sequence[int(pos)], codon, aa]
-                                        if pos not in seqdict.keys():
-                                            seqdict[pos] = [result]
+                                        if pos + 2 not in seqdict.keys():
+                                            seqdict[pos + 2] = [result]
                                         else:
-                                            seqdict[pos].append(result)
+                                            seqdict[pos + 2].append(result)
                                         pos = pos + 3
                         else:
                             f.write(">{}\n{}\n".format(header, sequence))
@@ -181,10 +181,10 @@ def SeqDict(file):
                                     codon = "%s%s%s" % (sequence[int(pos)], sequence[int(pos + 1)], sequence[int(pos + 2)])
                                     aa = translate(codon)
                                     result = [header, sequence[int(pos)], codon, aa]
-                                    if pos not in seqdict.keys():
-                                        seqdict[pos] = [result]
+                                    if pos + 1 not in seqdict.keys():
+                                        seqdict[pos + 1] = [result]
                                     else:
-                                        seqdict[pos].append(result)
+                                        seqdict[pos + 1].append(result)
                                     pos = pos + 3
                     else:
                         f.write(">{}\n{}\n".format(header, sequence))
