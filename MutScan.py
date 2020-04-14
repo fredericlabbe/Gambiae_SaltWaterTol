@@ -32,16 +32,16 @@ def SeqDict(file):
         end = "N" * gaps
         sequence = "".join((sequence, end))
         if len(sequence)%3 == 0:
-            protein = translate(sequence)
+            protein = translate(sequence[0:len(sequence) - gaps])
             if "*" in protein[0:len(protein) - 1]:
                 sequence = sequence[1:len(sequence)]
                 sequence = "".join((sequence, "N"))
-                protein = translate(sequence)
-                if "*" in protein[0:len(protein) - 2]:
+                protein = translate(sequence[0:len(sequence) - 1 - gaps])
+                if "*" in protein[0:len(protein) - 1]:
                     sequence = sequence[1:len(sequence)]
                     sequence = "".join((sequence, "N"))
-                    protein = translate(sequence)
-                    if "*" in protein[0:len(protein) - 2]:                        
+                    protein = translate(sequence[0:len(sequence) - 2 - gaps])
+                    if "*" in protein[0:len(protein) - 1]:                        
                         f.write(">{}\nThe nucleotide sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
                         g.write(">{}\nThe amino-acid sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
                     else:        
@@ -89,16 +89,16 @@ def SeqDict(file):
         else:
             sequence = "".join((sequence, "N"))
             if len(sequence)%3 == 0:
-                protein = translate(sequence)
-                if "*" in protein[0:len(protein) - 2]:
+                protein = translate(sequence[0:len(sequence) - gaps - 1])
+                if "*" in protein[0:len(protein) - 1]:
                     sequence = sequence[1:len(sequence)]
                     sequence = "".join((sequence, "N"))
-                    protein = translate(sequence)
-                    if "*" in protein[0:len(protein) - 2]:
+                    protein = translate(sequence[0:len(sequence) - 1 - gaps - 1])
+                    if "*" in protein[0:len(protein) - 1]:
                         sequence = sequence[1:len(sequence)]
                         sequence = "".join((sequence, "N"))
-                        protein = translate(sequence)
-                        if "*" in protein[0:len(protein) - 2]:                        
+                        protein = translate(sequence[0:len(sequence) - 2 - gaps - 1])
+                        if "*" in protein[0:len(protein) - 1]:                        
                             f.write(">{}\nThe nucleotide sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
                             g.write(">{}\nThe amino-acid sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
                         else:        
@@ -146,16 +146,16 @@ def SeqDict(file):
             else:
                 sequence = "".join((sequence, "N"))
                 if len(sequence)%3 == 0:
-                    protein = translate(sequence)
-                    if "*" in protein[0:len(protein) - 2]:
+                    protein = translate(sequence[0:len(sequence) - gaps - 2])
+                    if "*" in protein[0:len(protein) - 1]:
                         sequence = sequence[1:len(sequence)]
                         sequence = "".join((sequence, "N"))
-                        protein = translate(sequence)
-                        if "*" in protein[0:len(protein) - 2]:
+                        protein = translate(sequence[0:len(sequence) - 1 - gaps - 2])
+                        if "*" in protein[0:len(protein) - 1]:
                             sequence = sequence[1:len(sequence)]
                             sequence = "".join((sequence, "N"))
-                            protein = translate(sequence)
-                            if "*" in protein[0:len(protein) - 3]:                        
+                            protein = translate(sequence[0:len(sequence) - 2 - gaps - 2])
+                            if "*" in protein[0:len(protein) - 1]:                        
                                 f.write(">{}\nThe nucleotide sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
                                 g.write(">{}\nThe amino-acid sequence doesn't have an ORF (i.e. for each ORF, the sequence contains a stop codon in the middle of it)\n".format(header))
                             else:        
