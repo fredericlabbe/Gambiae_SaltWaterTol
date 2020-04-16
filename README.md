@@ -127,7 +127,7 @@ The script `MutScan.py` scans nucleotide sequence alignments (in [FASTA](https:/
 `python MutScan.py -h` Will print a full list of command arguments.
 
 #### Notes
-The script `MutScan.py` needs to be run from the directory containing the alignments.
+The script `MutScan.py` needs to be run from the directory containing the alignments. Expected warning message: "BiopythonWarning: Partial codon, len(sequence) not a multiple of three. Explicitly trim the sequence or add trailing N before translation. This may become an error in future."
 To run it, ensure that you are using Python v.2.7, and have installed the following dependencies: Bio, glob, and argparse.
 
 ___
