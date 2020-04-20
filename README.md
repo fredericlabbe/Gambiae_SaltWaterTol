@@ -71,7 +71,7 @@ To run it, ensure that you are using Python v.2.7, and have installed the follow
 
 ___
 ## Filtering sequence alignments
-The script `FltProGapMis.py` filters each sequence alignment in [PHYLIP](http://rosalind.info/glossary/phylip-format/) format (.phy) that has fewer than a maximum proportion of gap and missing nucleotides (e.g. 50%), and having a minimum length (e.g. 51 nucleotides). This script will move each sequence alignment that passed the filter to the `1_Keep` directory, and move each sequence alignment that did not pass the filter to the `2_Remove` directory.
+The script `FltProGapMis.py` filters each sequence alignment in [PHYLIP](http://rosalind.info/glossary/phylip-format/) format (`.phy`) that has fewer than a maximum proportion of gap and missing nucleotides (e.g. 50%), and having a minimum length (e.g. 51 nucleotides). This script will move each sequence alignment that passed the filter to the `1_Keep` directory, and move each sequence alignment that did not pass the filter to the `2_Remove` directory.
 
 #### Example command
 `python FltProGapMis.py --prop 0.5 --length 51`
@@ -108,7 +108,7 @@ To run it, ensure that you are using Python v.2.7, and have installed the follow
 
 ___
 ## Cropping FASTA alignments
-While [FASTA](https://www.bioinformatics.nl/tools/crab_fasta.html) alignments of big portion of a genome (e.g. full gene) have many purposes, some comparative genomic analysis required to crop these alignment into smaller ones (e.g. one exon or one CDS). The script `FastaCrop.py` crops nucleotide sequence alignments in FASTA format according to specific coordinates described in a [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) file.
+While [FASTA](https://www.bioinformatics.nl/tools/crab_fasta.html) alignments of big portion of a genome (e.g. full gene) have many purposes, some comparative genomic analysis required to crop these alignment into smaller ones (e.g. one exon or one CDS). The script `FastaCrop.py` crops nucleotide sequence alignments in FASTA format (`.fa`) according to specific coordinates described in a [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) file.
 
 #### Example command
 `python FastaCrop.py`
@@ -119,7 +119,7 @@ To run it, ensure that you are using Python v.2.7, and have installed the follow
 
 ___
 ## Scanning nonsynonymous-synonymous mutations
-The script `MutScan.py` scans coding nucleotide sequence alignments (in [FASTA](https://www.bioinformatics.nl/tools/crab_fasta.html) format), compares the nucleotide and amino-acid sequences between two aligned sets of sequences, and identifies the nonsynonymous and synonymous mutations. The script also checks the open reading frame (ORF), and translates the nucleotide sequences into amino-acid sequences. For each alignment, the nonsynonymous and synonymous mutations will be stored in a file (`file_MutScan.out`), and the nucleotide and amino-acid sequences will be exported into new FASTA files (`file_ORF.fa` and `file_ORF_AA.fa`, respectively).
+The script `MutScan.py` scans coding nucleotide sequence alignments (in [FASTA](https://www.bioinformatics.nl/tools/crab_fasta.html) format; `.fa`), compares the nucleotide and amino-acid sequences between two aligned sets of sequences, and identifies the nonsynonymous and synonymous mutations. The script also checks the open reading frame (ORF), and translates the nucleotide sequences into amino-acid sequences. For each alignment, the nonsynonymous and synonymous mutations will be stored in a file (`file_MutScan.out`), and the nucleotide and amino-acid sequences will be exported into new FASTA files (`file_ORF.fa` and `file_ORF_AA.fa`, respectively).
 
 #### Example command
 `python MutScan.py --set1 sequence1 sequence2 sequence3 --set2 sequence4 sequence5 --orientation forward`
