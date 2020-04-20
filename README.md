@@ -119,15 +119,15 @@ To run it, ensure that you are using Python v.2.7, and have installed the follow
 
 ___
 ## Scanning nonsynonymous-synonymous mutations
-The script `MutScan.py` scans nucleotide sequence alignments (in [FASTA](https://www.bioinformatics.nl/tools/crab_fasta.html) format), compares the nucleotide and amino-acid sequences between two aligned sets of species, and identifies the nonsynonymous and synonymous mutations. The script also checks the open reading frame (ORF), and translates the nucleotide sequences into amino-acid sequences. For each alignment, the nonsynonymous and synonymous mutations will be stored in a file (`file_MutScan.out`), and the nucleotide and amino-acid sequences will be exported into new FASTA files (`file_ORF.fa` and `file_ORF_AA.fa`, respectively).
+The script `MutScan.py` scans coding nucleotide sequence alignments (in [FASTA](https://www.bioinformatics.nl/tools/crab_fasta.html) format), compares the nucleotide and amino-acid sequences between two aligned sets of sequences, and identifies the nonsynonymous and synonymous mutations. The script also checks the open reading frame (ORF), and translates the nucleotide sequences into amino-acid sequences. For each alignment, the nonsynonymous and synonymous mutations will be stored in a file (`file_MutScan.out`), and the nucleotide and amino-acid sequences will be exported into new FASTA files (`file_ORF.fa` and `file_ORF_AA.fa`, respectively).
 
 #### Example command
-`python MutScan.py --set1 species1 species2 species3 --set2 species4 species5`
+`python MutScan.py --set1 sequence1 sequence2 sequence3 --set2 sequence4 sequence5 --orientation forward`
 
 `python MutScan.py -h` Will print a full list of command arguments.
 
 #### Notes
-The script `MutScan.py` needs to be run from the directory containing the alignments. Expected warning message: "BiopythonWarning: Partial codon, len(sequence) not a multiple of three. Explicitly trim the sequence or add trailing N before translation. This may become an error in future."
+The script `MutScan.py` needs to be run from the directory containing the alignment(s). The name(s) of the FASTA file(s) need to indicate the coordinates of the alignment(s) (i.e. `chrom_start_stop.fa`, e.g. `chr2_100_200.fa`). Expected warning message: "BiopythonWarning: Partial codon, len(sequence) not a multiple of three. Explicitly trim the sequence or add trailing N before translation. This may become an error in future."
 To run it, ensure that you are using Python v.2.7, and have installed the following dependencies: Bio, glob, and argparse.
 
 ___
