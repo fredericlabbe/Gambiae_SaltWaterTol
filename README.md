@@ -40,7 +40,7 @@ To compare the list of CRISPR target sites found in different species, and thus 
 `python Tln2Bed.py -h` Will print a full list of command arguments.
 
 #### Notes
-The script `Tln2Bed.py` takes into account that the coordinates are zero-based in the convertion table (i.e. start at 0), and are one-based (i.e. start at 1) in the list of CRISPR target sites. The coordinates in the output (BED) file are one-based (i.e. start at 1; same as samtools faidx, the GFF annotation file, and the FASTA file).
+The script `Tln2Bed.py` takes into account that the coordinates are zero-based in the convertion table (i.e. start at 0), and are one-based (i.e. start at 1) in the list of CRISPR target sites. The coordinates in the output (BED) file are one-based (i.e. same as [Samtools faidx](http://www.htslib.org/doc/samtools-faidx.html), the GFF annotation file, and the FASTA file).
 To run it, ensure that you are using Python v.2.7, and have installed the following dependencies: tempfile, and argparse.
 
 ___
