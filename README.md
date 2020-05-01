@@ -57,7 +57,7 @@ To run it, ensure that you are using Python v.2.7, and have installed the follow
 
 ___
 ## Filtering non-coding loci
-To infer the species tree of the *Anopheles gambiae* complex [Thawornwattana et al. (2018)](https://academic.oup.com/mbe/article/35/10/2512/5068377) extracted coding and non-coding short segments (called loci) from the genomes of six members of the *Anopheles gambiae* complex and used the program [BPP](https://academic.oup.com/cz/article/61/5/854/1821090). BPP implements a Bayesian method under the multispecies coalescent (MSC) model which takes into account genealogical heterogeneity across the genome and uncertainty in the gene trees. Following the procedure of [Thawornwattana et al. (2018)](https://academic.oup.com/mbe/article/35/10/2512/5068377), the script `NonCodingLoci.py` filters and extracts the coordinates of the non-coding loci containing between 100 and 1,000 sites, and that are at least 2 kb apart from consecutive loci. The coordinates of the filtered non-coding loci will be stored into one [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) file and one [BEDGRAPH](https://genome.ucsc.edu/goldenPath/help/bedgraph.html) file, which can then be used in [MafFilter](https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-15-53) to extract the non-coding regions of an alignment. 
+To infer the species tree of the *Anopheles gambiae* complex [Thawornwattana et al. (2018)](https://academic.oup.com/mbe/article/35/10/2512/5068377) extracted coding and non-coding short segments (called loci) from the genomes of six members of the *Anopheles gambiae* complex and used the program [BPP](https://academic.oup.com/cz/article/61/5/854/1821090). BPP implements a Bayesian method under the multispecies coalescent (MSC) model which takes into account genealogical heterogeneity across the genome and uncertainty in the gene trees. Following the procedure of Thawornwattana et al. (2018), the script `NonCodingLoci.py` filters and extracts the coordinates of the non-coding loci containing between 100 and 1,000 sites, and that are at least 2 kb apart from consecutive loci. The coordinates of the filtered non-coding loci will be stored into one [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) file and one [BEDGRAPH](https://genome.ucsc.edu/goldenPath/help/bedgraph.html) file, which can then be used in [MafFilter](https://bmcgenomics.biomedcentral.com/articles/10.1186/1471-2164-15-53) to extract the non-coding regions of an alignment. 
 
 #### Example command
 `python NonCodLoc.py --bed 2L.bed --chromosome 2L --size 49364325 --distance 2000 --minimum 100 --maximum 1000`
@@ -70,9 +70,9 @@ To infer the species tree of the *Anopheles gambiae* complex [Thawornwattana et 
 | `bed`        | Bed file describing the coordinates of the loci |
 | `chromosome` | Name of the chromosome/scaffold |
 | `size`       | Size (bp) of the chromosome/scaffold |
-| `distance`   | Minimum distance (bp) between consecutive loci (default: 2000) |
-| `minimum`    | Minimum number of sites (bp) per loci (default: 100) |
-| `maximum`    | Maximum number of sites (bp) per loci (default: 1000) |
+| `distance`   | Minimum distance (bp) between consecutive loci (default is 2000) |
+| `minimum`    | Minimum number of sites (bp) per loci (default is 100) |
+| `maximum`    | Maximum number of sites (bp) per loci (default is 1000) |
 
 #### Notes
 The script `NonCodLoc.py` takes a [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) file describing the coordinates of each non-coding locus which can be generated using [BEDtools](https://bedtools.readthedocs.io/en/latest/) and a general feature format (GFF) file describing the genes and other features of the genome. While the default parameters of the script `NonCodLoc.py` follow the exact procedure of [Thawornwattana et al. (2018)](https://academic.oup.com/mbe/article/35/10/2512/5068377), different parameters can be tested (i.e. the minmum distance between consecutive loci, and the minimum and maximum of sites per loci).
@@ -87,6 +87,11 @@ ___
 
 `python ExclSpecPhyl.py -h` Will print a full list of command arguments.
 
+#### Command arguments
+| Name | Description |
+| :--: | ----------- | 
+| `species` | Species to exclude from the multiple sequence alignments |
+
 #### Notes
 The script `ExclSpecPhyl.py` needs to be run from the directory containing the sequence alignments to filter.
 To run it, ensure that you are using Python v.2.7, and have installed the following dependencies: glob, and argparse.
@@ -100,6 +105,12 @@ The script `FltProGapMis.py` filters each sequence alignment in [PHYLIP](http://
 
 `python FltProGapMis.py -h` Will print a full list of command arguments.
 
+#### Command arguments
+| Name | Description |
+| :--: | ----------- | 
+| `prop`   | Maximum proportion of gap and missing nucleotides in the alignment |
+| `length` | Minimum length (without gap and missing nucleotides) |
+
 #### Notes
 The script `FltProGapMis.py` needs to be run from the directory containing the sequence alignments to filter.
 To run it, ensure that you are using Python v.2.7, and have installed the following dependencies: os, glob, shutil, and argparse.
@@ -112,6 +123,12 @@ For computational tractability of [BPP](https://academic.oup.com/cz/article/61/5
 `python NbLociCtl.py --block 100 --species 7`
 
 `python NbLociCtl.py -h` Will print a full list of command arguments.
+
+#### Command arguments
+| Name | Description |
+| :--: | ----------- | 
+| `block`   | Number of loci per block |
+| `species` | Number species per loci |
 
 #### Notes
 The script `NbLociCtl.py` needs to be run from the directory containing the control and sequence alignment files required by the A01 analysis of BPP. The blocks having less than the required number of loci can be run in BPP using the modified control file, or can be excluded from the BPP analysis.
@@ -148,6 +165,13 @@ The script `MutScan.py` scans coding nucleotide sequence alignments (in [FASTA](
 
 `python MutScan.py -h` Will print a full list of command arguments.
 
+#### Command arguments
+| Name | Description |
+| :--: | ----------- | 
+| `set1`        | List of sequences from the first set |
+| `set2`        | List of sequences from the second set |
+| `orientation` | Orientation of the sequences to be compared (forward or reverse) |
+
 #### Notes
 The script `MutScan.py` needs to be run from the directory containing the alignment(s). The name(s) of the FASTA file(s) need to indicate the coordinates of the alignment(s) (i.e. `chrom_start_stop.fa`, e.g. `chr2_100_200.fa`). Expected warning message: "BiopythonWarning: Partial codon, len(sequence) not a multiple of three. Explicitly trim the sequence or add trailing N before translation. This may become an error in future."
 To run it, ensure that you are using Python v.2.7, and have installed the following dependencies: Bio, glob, and argparse.
@@ -158,4 +182,4 @@ The A00 analysis of [BPP](https://academic.oup.com/cz/article/61/5/854/1821090) 
 
 ___
 ## Plotting population genomic statistics
-The script [popgenWindows.py](https://github.com/simonhmartin/genomics_general) computes some standard population genomic statistics in sliding windows: pi, FST and DXY. The results generated by this script can be read, manipulated and plotted into [R](https://www.r-project.org/) however you like, but I have written some functions to make these tasks easier. These functions are provided in the script `PlotpopgenWindows.R`. The [R Markdown notebook](https://rmarkdown.rstudio.com/articles_intro.html) `PlotpopgenWindows.Rmd` provides a tutorial containing all text, code, and results.
+The script [popgenWindows.py](https://github.com/simonhmartin/genomics_general) computes some standard population genomic statistics in sliding windows: pi, *FST* and *DXY*. The results generated by this script can be read, manipulated and plotted into [R](https://www.r-project.org/) however you like, but I have written some functions to make these tasks easier. These functions are provided in the script `PlotpopgenWindows.R`. The [R Markdown notebook](https://rmarkdown.rstudio.com/articles_intro.html) `PlotpopgenWindows.Rmd` provides a tutorial containing all text, code, and results.
