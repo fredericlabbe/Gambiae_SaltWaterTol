@@ -26,6 +26,12 @@ The script `CRISPRs.py` checks the occurrence of overlapping forward and reverse
 
 `python CRISPRs.py -h` Will print a full list of command arguments.
 
+#### Command arguments
+| Name | Description |
+| :--: | ----------- | 
+| `size` | Size of the CRISPR target site without the PAM sequence (default is 18) |
+| `ref`  | Reference genome in FASTA format |
+
 #### Notes
 The script `CRISPRs.py` will not check the occurrence of CRISPR target sites within soft-masked regions of the reference genome (i.e. in lower-case, e.g. repetitive elements and low-complexity sequences).
 To run it, ensure that you are using Python v.2.7, and have installed the following dependencies: os, Bio, re, and argparse.
