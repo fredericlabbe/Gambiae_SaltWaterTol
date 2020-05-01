@@ -45,6 +45,12 @@ To compare the list of CRISPR target sites found in different species, and thus 
 
 `python Tln2Bed.py -h` Will print a full list of command arguments.
 
+#### Command arguments
+| Name | Description |
+| :--: | ----------- | 
+| `tln`    | TLN table generated with the liftover() function of MafFilter |
+| `crispr` | List of CRISPR target sites generated with the CRISPRs.py script |
+
 #### Notes
 The script `Tln2Bed.py` takes into account that the coordinates are zero-based in the convertion table (i.e. start at 0), and are one-based (i.e. start at 1) in the list of CRISPR target sites. The coordinates in the output (BED) file are one-based (i.e. same as [Samtools faidx](http://www.htslib.org/doc/samtools-faidx.html), the GFF annotation file, and the FASTA file).
 To run it, ensure that you are using Python v.2.7, and have installed the following dependencies: tempfile, and argparse.
@@ -57,6 +63,16 @@ To infer the species tree of the *Anopheles gambiae* complex [Thawornwattana et 
 `python NonCodLoc.py --bed 2L.bed --chromosome 2L --size 49364325 --distance 2000 --minimum 100 --maximum 1000`
 
 `python NonCodLoc.py -h` Will print a full list of command arguments.
+
+#### Command arguments
+| Name | Description |
+| :--: | ----------- | 
+| `bed`        | Bed file describing the coordinates of the loci |
+| `chromosome` | Name of the chromosome/scaffold |
+| `size`       | Size (bp) of the chromosome/scaffold |
+| `distance`   | Minimum distance (bp) between consecutive loci (default: 2000) |
+| `minimum`    | Minimum number of sites (bp) per loci (default: 100) |
+| `maximum`    | Maximum number of sites (bp) per loci (default: 1000) |
 
 #### Notes
 The script `NonCodLoc.py` takes a [BED](https://genome.ucsc.edu/FAQ/FAQformat.html#format1) file describing the coordinates of each non-coding locus which can be generated using [BEDtools](https://bedtools.readthedocs.io/en/latest/) and a general feature format (GFF) file describing the genes and other features of the genome. While the default parameters of the script `NonCodLoc.py` follow the exact procedure of [Thawornwattana et al. (2018)](https://academic.oup.com/mbe/article/35/10/2512/5068377), different parameters can be tested (i.e. the minmum distance between consecutive loci, and the minimum and maximum of sites per loci).
