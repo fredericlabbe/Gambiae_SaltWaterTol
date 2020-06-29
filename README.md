@@ -14,6 +14,7 @@ Not everything is documented yet, but most scripts have some helpful information
 * [Extracting best trees](#Extracting-best-trees)
 * [Cropping FASTA alignments](#Cropping-FASTA-alignments)
 * [Scanning nonsynonymous-synonymous mutations](#Scanning-nonsynonymous-synonymous-mutations)
+* [Extracting unique ortholog IDs](#Extracting-unique-ortholog-IDs)
 * [Summarizing divergence times](#Summarizing-divergence-times)
 * [Plotting population genomic statistics](#Plotting-population-genomic-statistics)
 
@@ -175,6 +176,24 @@ The script `MutScan.py` scans coding nucleotide sequence alignments (in [FASTA](
 #### Notes
 The script `MutScan.py` needs to be run from the directory containing the alignment(s). The name(s) of the FASTA file(s) need to indicate the coordinates of the alignment(s) (i.e. `chrom_start_stop.fa`, e.g. `chr2_100_200.fa`). Expected warning message: "BiopythonWarning: Partial codon, len(sequence) not a multiple of three. Explicitly trim the sequence or add trailing N before translation. This may become an error in future."
 To run it, ensure that you are using Python v.2.7, and have installed the following dependencies: Bio, glob, and argparse.
+
+___
+## Extracting unique ortholog IDs
+The script `BioMartOrtho.py` extracts unique ortholog IDs from the output of BioMart as available on [VectorBase](https://biomart.vectorbase.org/biomart/martview/abe9742c0c6ad789305c2f72967d9fb7). The list of unique ortholog IDs can then be used to identify enriched biological themes, particularly gene ontology (GO) terms (e.g. using [DAVID](https://david.ncifcrf.gov/)). The list of of *D. melanogaster* ortholog IDs will be stored into one output file with the suffix `_BioMartOrtho.out`.
+
+#### Example command
+`python BioMartOrtho.py --ortho BioMart_Orthologs.xls`
+
+`python BioMartOrtho.py -h` Will print a full list of command arguments.
+
+#### Command arguments
+| Name | Description |
+| :--: | ----------- | 
+| `ortho` | Excel file describing the Drosophila melanogaster orthologues (generated with BioMart) |
+
+#### Notes
+To retrieve the *D. melanogaster* orthologs of the gene list, follow the instructions below: (1) Open [Biomart](https://biomart.vectorbase.org/biomart/martview/b90ba8bc9241f1221f75807159d06008) available on VectorBase; (2) choose the first dataset: VectorBase genes; (3) choose the second dataset: Anopheles gambiae genes (AgamP4.12); (4) open the "Gene" tab from the "Filters" navigation bar, and import the gene list as the "Input external references ID list"; (5) select the "homologues" option in the "Attributes" navigation bar; (6) open the "GENE" tab from the "Attributes" navigation bar, and pick the information to be included in the output (e.g. Gene stable ID, chromosome name, start, stop...); open the "ORTHOLOGUES" tab from the "Attributes" navigation bar, select "Drosophila melanogaster Orthologues", and pick the information to be included in the output (e.g. Gene stable ID, chromosome name, start, stop...); (7) click on "Results" from the menu bar to preview the results of the query; (8) export the unique results in Excel format by selecting the corresponding parameter.
+To run it, ensure that you are using Python v.2.7, and have installed the following dependencies: os, panda, and argparse.
 
 ___
 ## Summarizing divergence times
